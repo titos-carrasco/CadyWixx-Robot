@@ -5,7 +5,7 @@ from __future__ import print_function
 import paho.mqtt.client as paho
 import json
 import time
-import Queue
+import queue as Queue
 
 MQTT_SERVER = "test.mosquitto.org"
 MQTT_PORT = 1883
@@ -84,6 +84,7 @@ def main():
     abort = False
     while( not abort ):
         message = messages.get()
+        message.payload = message.payload.decode( 'utf-8' )
         cmdLine = message.payload.strip().upper().split()
         print( '[IRemote] Mensaje recibido:', cmdLine )
 
